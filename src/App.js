@@ -9,6 +9,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <NavBar />
+
       <Menu />
       <div className="App"></div>
     </>
