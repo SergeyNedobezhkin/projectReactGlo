@@ -7,10 +7,12 @@ import { Banner } from "./Banner";
 const MenuStyled = styled.main`
   background-color: #ccc;
   margin-top: 80px;
+  margin-left: 380px;
 `;
 
 const MenuSection = styled.section`
   padding-bottom: 40px;
+  padding-left: 20px;
 `;
 
 export const Menu = ({ setOpenItem }) => (
