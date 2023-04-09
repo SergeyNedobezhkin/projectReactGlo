@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ModalButton } from "./ModalButton";
+import { ModalBtn } from "./ModalButton";
 
 const Overlay = styled.div`
   position: fixed;
@@ -27,28 +27,22 @@ const ModalBanner = styled.div`
   background-image: url(${({ img }) => img});
   background-position: center;
   background-size: cover;
-  margin-bottom: 20px; ;;
 `;
-const NameAndPriceDiv = styled.div`
+const Contant = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  height: calc(100% - 200px);
+  padding: 30px;
 `;
-const NamePriceDiv = styled.div`
-  alight-item: start;
-  padding-left: 20px;
 
-  font-family: "Pacifico";
-  font-style: normal;
-  font-weight: 400;
+const HeaderContant = styled.div`
+  display: flex;
+  justify-content: space-between;
   font-size: 30px;
-`;
-const PriceDiv = styled.div`
-  alight-item: end;
-  padding-right: 50px;
-  font-family: "Pacifico";
+  font-family: "Pacifico", cursive;
   font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
+  font-weight: 700;
 `;
 
 export const ModalItem = ({ openItem, setOpenItem }) => {
@@ -64,16 +58,18 @@ export const ModalItem = ({ openItem, setOpenItem }) => {
     <Overlay id="overlay" onClick={closeModal}>
       <Modal>
         <ModalBanner img={openItem.img} />
-        <NameAndPriceDiv>
-          <NamePriceDiv>{openItem.name}</NamePriceDiv>
-          <PriceDiv>
-            {openItem.price.toLocaleString("ru-RU", {
-              style: "currency",
-              currency: "RUB",
-            })}
-          </PriceDiv>
-        </NameAndPriceDiv>
-        <ModalButton />
+        <Contant>
+          <HeaderContant>
+            <div>{openItem.name}</div>
+            <div>
+              {openItem.price.toLocaleString("ru-RU", {
+                style: "currency",
+                currency: "RUB",
+              })}
+            </div>
+          </HeaderContant>
+          <ModalBtn>Добавить</ModalBtn>
+        </Contant>
       </Modal>
     </Overlay>
   );

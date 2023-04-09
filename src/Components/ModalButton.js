@@ -1,16 +1,21 @@
-import React from "react";
 import styled from "styled-components";
 
-const ModalBtn = styled.button`
+export const ModalBtn = styled.button`
+  margin: 0 auto;
+  display: block;
   width: 250px;
   height: 65px;
-  margin-left: 175px;
-  margin-top: 230px;
+  font-size: inherit;
+  font-family: inherit;
   color: white;
-  background-color: #4caf50; /* Green */
-  border: none;
+  background-color: #299b01;
+  border-color: transparent;
   text-align: center;
   text-decoration: none;
+  &:hover {
+    background-color: #b8c0b8;
+    color: #299b01;
+    border-color: #299b01;
+    border: none;
+  }
 `;
-
-export const ModalButton = () => <ModalBtn>Добавить</ModalBtn>;
