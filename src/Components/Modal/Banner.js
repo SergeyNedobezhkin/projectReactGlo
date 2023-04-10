@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import MenuBannerImg from "../image/banner.png";
+import MenuBannerImg from "../../image/banner.png";
 
 const MenuBannerStyleImg = styled.div`
   width: 100%;
