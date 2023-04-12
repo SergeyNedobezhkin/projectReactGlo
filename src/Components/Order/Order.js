@@ -46,9 +46,10 @@ const TotalPrice = styled.span`
 
 const EmptyList = styled.p`
   text-align: center;
+  cursor: pointer;
 `;
 
-export const Order = ({ orders, setOrders }) => {
+export const Order = ({ orders, setOrders, setOpenItem }) => {
   const total = orders.reduce(
     (result, order) => TotalPriceItems(order) + result,
     0
@@ -76,6 +77,7 @@ export const Order = ({ orders, setOrders }) => {
                   order={order}
                   deleteItem={deleteItem}
                   index={index}
+                  setOpenItem={setOpenItem}
                 />
               ))}
             </OrderList>

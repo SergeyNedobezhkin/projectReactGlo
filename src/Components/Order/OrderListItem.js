@@ -19,6 +19,7 @@ const OrderItemStyled = styled.li`
   display: flex;
   flex-wrap: wrap;
   margin: 15px 0;
+  cursor: pointer;
 `;
 const ItemName = styled.span`
   flex-grow: 1;
@@ -35,22 +36,26 @@ const ToppingName = styled.div`
   font-size: 14px;
 `;
 
-export const OrderListItem = ({ order, index, deleteItem }) => {
+export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
   const topping = order.topping
     .filter((item) => item.checked)
     .map((item) => item.name)
     .join(", ");
-
   return (
-    <OrderItemStyled>
+    <OrderItemStyled onClick={() => setOpenItem({ ...order, index })}>
       <ItemName>
-        {order.name}
-        {order.choice}
+        {order.name} {order.choice}
       </ItemName>
       <span>{order.count}</span>
+
       <ItemPrice>{FormatCurrency(TotalPriceItems(order))}</ItemPrice>
-      <TrashBtn onClick={() => deleteItem(index)} />
-      {topping && <ToppingName>Допы: {topping}</ToppingName>}
+      <TrashBtn
+        onClick={(e) => {
+          e.stopPropagation();
+          deleteItem(index);
+        }}
+      />
+      {topping && <ToppingName>Допы: {topping} </ToppingName>}
     </OrderItemStyled>
   );
 };
