@@ -6,6 +6,10 @@ import { UseCount } from "../Hooks/UseCount";
 import { TotalPriceItems } from "../Functions/secondaryFanction";
 import { TotalPriceItemStyle } from "../Functions/secondaryFanction";
 import { FormatCurrency } from "../Functions/secondaryFanction";
+import { Toppings } from "./Toppings";
+import { UseToppings } from "../Hooks/useToppings";
+import { UseChoices } from "../Hooks/useChoices";
+import { Choices } from "./Choices";
 
 const Overlay = styled.div`
   position: fixed;
@@ -52,6 +56,8 @@ const HeaderContant = styled.div`
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
   const counter = UseCount();
+  const toppings = UseToppings(openItem);
+  const choices = UseChoices(openItem);
 
   const closeModal = (e) => {
     if (e.target.id === "overlay") {
@@ -61,6 +67,8 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
   const order = {
     ...openItem,
     count: counter.count,
+    topping: toppings.toppings,
+    choice: choices.choice,
   };
 
   const addToOrder = () => {
@@ -75,14 +83,25 @@ export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
         <Contant>
           <HeaderContant>
             <div>{openItem.name}</div>
+
             <div>{FormatCurrency(openItem.price)}</div>
           </HeaderContant>
           <CountItem {...counter} />
+
+          {openItem.toppings && <Toppings {...toppings} />}
+          {openItem.choices && <Choices {...choices} openItem={openItem} />}
+
           <TotalPriceItemStyle>
             <span>Цена:</span>
             <span>{FormatCurrency(TotalPriceItems(order))}</span>
           </TotalPriceItemStyle>
-          <ModalBtn onClick={addToOrder}>Добавить</ModalBtn>
+
+          <ModalBtn
+            onClick={addToOrder}
+            disabled={order.choices && !order.choice}
+          >
+            Добавить
+          </ModalBtn>
         </Contant>
       </Modal>
     </Overlay>

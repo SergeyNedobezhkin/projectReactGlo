@@ -17,5 +17,10 @@ export const ModalBtn = styled.button`
     color: #299b01;
     border-color: #299b01;
     border: none;
+    &:disabled {
+      color: #bbb;
+      background-color: #ccc;
+      border-color: #aaa;
+    }
   }
 `;

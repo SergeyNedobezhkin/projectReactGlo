@@ -6,10 +6,15 @@ export const TotalPriceItemStyle = styled.div`
 `;
 
 export const TotalPriceItems = (order) => {
-  return order.price * order.count;
+  const countTopping =
+    order.topping && order.topping.filter((item) => item.checked).length;
+
+  const priceTopping = order.price * 0.1 * countTopping;
+
+  return (order.price + priceTopping) * order.count;
 };
-export const FormatCurrency = (num) => {
-  return num.toLocaleString("ru-RU", {
+export const FormatCurrency = (value) => {
+  return value.toLocaleString("ru-RU", {
     style: "currency",
     currency: "RUB",
   });
