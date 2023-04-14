@@ -6,7 +6,7 @@ const getTopping = (toppings) =>
     checked: false,
   }));
 
-export function UseToppings(openItem) {
+export function useToppings(openItem) {
   const readyTopping = openItem.topping
     ? openItem.topping
     : openItem.toppings

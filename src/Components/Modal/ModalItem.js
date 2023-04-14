@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { ModalBtn } from "./ModalBtn";
 import { CountItem } from "./CountItem";
-import { UseCount } from "../Hooks/UseCount";
+import { useCount } from "../Hooks/useCount";
 import { TotalPriceItems } from "../Functions/secondaryFanction";
 import { TotalPriceItemStyle } from "../Functions/secondaryFanction";
 import { FormatCurrency } from "../Functions/secondaryFanction";
 import { Toppings } from "./Toppings";
-import { UseToppings } from "../Hooks/useToppings";
-import { UseChoices } from "../Hooks/useChoices";
+import { useToppings } from "../Hooks/useToppings";
+import { useChoices } from "../Hooks/useChoices";
 import { Choices } from "./Choices";
 
 const Overlay = styled.div`
@@ -55,9 +55,9 @@ const HeaderContant = styled.div`
 `;
 
 export const ModalItem = ({ openItem, setOpenItem, orders, setOrders }) => {
-  const counter = UseCount(openItem.count);
-  const toppings = UseToppings(openItem);
-  const choices = UseChoices(openItem);
+  const counter = useCount(openItem.count);
+  const toppings = useToppings(openItem);
+  const choices = useChoices(openItem);
   const isEdit = openItem.index > -1;
 
   const closeModal = (e) => {

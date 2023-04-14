@@ -4,6 +4,7 @@ import { ModalBtn } from "../Modal/ModalBtn";
 import { OrderListItem } from "./OrderListItem";
 import { TotalPriceItems } from "../Functions/secondaryFanction";
 import { FormatCurrency } from "../Functions/secondaryFanction";
+import { projection } from "../Functions/secondaryFanction";
 
 const OrderStyled = styled.section`
   position: fixed;
@@ -49,13 +50,37 @@ const EmptyList = styled.p`
   cursor: pointer;
 `;
 
+const rulesData = {
+  itemName: ["name"],
+  price: ["price"],
+  count: ["count"],
+  topping: [
+    "topping",
+    (arr) => arr.filter((obj) => obj.checked).map((obj) => obj.name),
+    (arr) => (arr.length ? arr : "no topping"),
+  ],
+  choice: ["choice", (item) => (item ? item : "no choices")],
+};
+
 export const Order = ({
   orders,
   setOrders,
   setOpenItem,
   authentication,
   logIn,
+  firebaseDatabase,
 }) => {
+  const dataBase = firebaseDatabase();
+
+  const sendOrder = () => {
+    const newOrder = orders.map(projection(rulesData));
+    dataBase.ref("orders").push().set({
+      nameClient: authentication.displayName,
+      email: authentication.email,
+      order: newOrder,
+    });
+  };
+
   const total = orders.reduce(
     (result, order) => TotalPriceItems(order) + result,
     0
@@ -70,10 +95,12 @@ export const Order = ({
     newOrders.splice(index, 1);
     setOrders(newOrders);
   };
+
   return (
     <>
       <OrderStyled>
         <OrderTitle>Ваш заказ</OrderTitle>
+        {}
         <OrderContant>
           {orders.length ? (
             <OrderList>
@@ -99,7 +126,8 @@ export const Order = ({
         <ModalBtn
           onClick={() => {
             if (authentication) {
-              console.log(orders);
+              sendOrder();
+              setOrders([]);
             } else {
               logIn();
             }
