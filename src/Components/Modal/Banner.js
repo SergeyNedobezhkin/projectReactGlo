@@ -11,4 +11,4 @@ const MenuBannerStyleImg = styled.div`
   background-size: cover;
 `;
 
-export const Banner = (pros) => <MenuBannerStyleImg />;
+export const Banner = () => <MenuBannerStyleImg />;
