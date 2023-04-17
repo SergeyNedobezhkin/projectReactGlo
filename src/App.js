@@ -49,7 +49,7 @@ const App = () => {
       <NavBar />
       <Order />
       <Menu />
-      {openItem.openItem && <ModalItem {...openItem} {...orders} />}{" "}
+      {openItem.openItem && <ModalItem />}
       {orderConfirm.openOrderConfirm && (
         <OrderConfirm firebaseDatabase={firebase.database} />
       )}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Overlay } from "../Modal/ModalItem";
 import { OrderTitle } from "./Order";
@@ -8,6 +8,7 @@ import { ModalBtn } from "../Modal/ModalBtn";
 import { projection } from "../Functions/secondaryFanction";
 import { TotalPriceItems } from "../Functions/secondaryFanction";
 import { FormatCurrency } from "../Functions/secondaryFanction";
+import { Context } from "../Functions/context";
 
 const Modal = styled.div`
   background-color: white;
