@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-
 import { ListItem } from "./ListItem";
 import { Banner } from "../Modal/Banner";
-
 import { useFetch } from "../Hooks/useFetch";
 import { Loading } from "../Modal/Loading";
 
@@ -18,7 +16,7 @@ const MenuSection = styled.section`
   padding-left: 20px;
 `;
 
-export const Menu = ({ setOpenItem }) => {
+export const Menu = () => {
   const res = useFetch();
   const dbMenu = res.response;
 
@@ -29,17 +27,11 @@ export const Menu = ({ setOpenItem }) => {
         <>
           <MenuSection>
             <h2>Бургеры</h2>
-            <ListItem
-              itemList={dbMenu.burger}
-              setOpenItem={setOpenItem}
-            ></ListItem>
+            <ListItem itemList={dbMenu.burger}></ListItem>
           </MenuSection>
           <MenuSection>
             <h2>Закуски / напитки</h2>
-            <ListItem
-              itemList={dbMenu.other}
-              setOpenItem={setOpenItem}
-            ></ListItem>
+            <ListItem itemList={dbMenu.other}></ListItem>
           </MenuSection>
         </>
       ) : res.error ? (

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import trashImg from "../../image/trash.svg";
 import { TotalPriceItems } from "../Functions/secondaryFanction";
 import { FormatCurrency } from "../Functions/secondaryFanction";
+import { Context } from "../Functions/context";
 
 const TrashBtn = styled.button`
   width: 23.51px;
@@ -36,11 +37,16 @@ const ToppingName = styled.div`
   font-size: 14px;
 `;
 
-export const OrderListItem = ({ order, index, deleteItem, setOpenItem }) => {
+export const OrderListItem = ({ order, index, deleteItem }) => {
+  const {
+    openItem: { setOpenItem },
+  } = useContext(Context);
+
   const topping = order.topping
     .filter((item) => item.checked)
     .map((item) => item.name)
     .join(", ");
+
   return (
     <OrderItemStyled onClick={() => setOpenItem({ ...order, index })}>
       <ItemName>
