@@ -42,15 +42,15 @@ const sendOrder = (dataBase, orders, authentication) => {
   });
 };
 
-export const OrderConfirm = ({
-  orders,
-  setOrders,
-  authentication,
-  setOpenOrderConfirm,
-  firebaseDatabase,
-}) => {
-  const dataBase = firebaseDatabase();
+export const OrderConfirm = () => {
+  const {
+    orders: { orders, setOrders },
+    auth: { authentication },
+    orderConfirm: { setOpenOrderConfirm },
+    firebaseDatabase,
+  } = useContext(Context);
 
+  const dataBase = firebaseDatabase();
   const total = orders.reduce(
     (result, order) => TotalPriceItems(order) + result,
     0
